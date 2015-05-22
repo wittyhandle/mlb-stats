@@ -56,8 +56,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-//module.exports = app;
-
 var debug = require('debug')('mlb-stats:server');
 var http = require('http');
 
