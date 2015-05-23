@@ -7,6 +7,7 @@
     "browser-sync": "^2.7.1",
     "gulp": "^3.8.11",
     "gulp-nodemon": "^2.0.3",
+    "gulp-sass": "^2.0.1",
     "http-server": "^0.6.1",
     "karma": "~0.10",
     "karma-junit-reporter": "^0.2.2",
