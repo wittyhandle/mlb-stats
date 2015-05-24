@@ -27,6 +27,8 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
   gulp.watch("public/sass/*.scss", ['sass']);
   gulp.watch("routes/**/*.js").on('change', reload);
+  gulp.watch("public/**/*.js").on('change', reload);
+  gulp.watch("public/**/*.html").on('change', reload);
 
 });
 
