@@ -4,9 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Promise = require('bluebird');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 
@@ -20,10 +24,46 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// important this is before the passport middleware configurations below
+// so that passport doesn't create sessions for static requests
 app.use(express.static(path.join(__dirname, 'public')));
+
+// passport configs
+app.use(require('express-session')({
+    secret: '94kskle0skskdos0dks300siklsl0',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    console.log('local login called');
+    // call to a function in the User model when it's written
+    done(null, {username: 'mike', role: 'admin'});
+    //done(null, {username: 'mike', role: 'admin'});
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  console.log("serializing " + user.username);
+  done(null, {id: user.id, username: user.username, role: user.role});
+});
+
+passport.deserializeUser(function(user, done) {
+  console.log("deserializing " + user);
+  done(null, user);
+});
 
 app.use('/', routes);
 app.use('/users', users);
+
+app.post('/login', passport.authenticate('local'), function(req, res) {
+  res.send(req.user);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
