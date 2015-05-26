@@ -11,6 +11,7 @@ var users = require('./routes/users');
 
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var User = require('./models').user;
 
 var app = express();
 
@@ -41,9 +42,20 @@ app.use(passport.session());
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
+    
+    User.findOne({where: {username: username}}).then(function(user) {
+
+      if (user) {
+        done(null, {username: 'mike', role: 'admin'});
+      } else {
+        done(null, false);
+      }
+
+    });
+
     console.log('local login called');
     // call to a function in the User model when it's written
-    done(null, {username: 'mike', role: 'admin'});
+    
     //done(null, {username: 'mike', role: 'admin'});
   }
 ));
