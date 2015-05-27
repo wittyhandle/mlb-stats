@@ -9,6 +9,7 @@ var Promise = require('bluebird');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('./models').user;
@@ -46,17 +47,21 @@ passport.use(new LocalStrategy(
     User.findOne({where: {username: username}}).then(function(user) {
 
       if (user) {
-        done(null, {username: 'mike', role: 'admin'});
+        
+        if (bcrypt.compareSync(password, user.password)) {
+          done(null, user);
+        } else {
+          console.log("Password does not match");
+          done(null, false);
+        }
+
       } else {
         done(null, false);
       }
 
-    });
-
-    console.log('local login called');
-    // call to a function in the User model when it's written
-    
-    //done(null, {username: 'mike', role: 'admin'});
+    }).catch(function(error) {
+      done(error);
+    });    
   }
 ));
 
