@@ -35,7 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-session')({
     secret: '94kskle0skskdos0dks300siklsl0',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000 * 10
+    }
 }));
 
 app.use(passport.initialize());

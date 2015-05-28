@@ -1,16 +1,18 @@
 'use strict';
 
-app.factory('authService', ['$q', '$timeout', '$http', function($q, $timeout, $http) {
+app.factory('authService', ['$q', '$http', function($q, $http) {
 
-  var login = function(credentials) {
+  var login = function(creds) {
 
     var deferred = $q.defer();
     
-    $timeout(function() {
-      // return a hardcoded user for now
-      var me = {user: 'mike', role: 'admin'};
-      deferred.resolve(me);
-    }, 2000);
+    $http.post('/login', creds)
+      .success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      })
+      .error(function(data, status, headers, config) {
+        deferred.reject(status);
+      });
 
     return deferred.promise;
 

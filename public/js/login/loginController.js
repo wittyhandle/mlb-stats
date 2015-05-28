@@ -6,9 +6,13 @@ app.controller('loginController', ['$scope', 'authService', function($scope, aut
 
   $scope.login = function(credentials) {
 
-    authService.login(credentials).then(function(user) {
-      console.log('user', user);
-    });
+    authService.login(credentials).then(
+      function(user) {
+        console.log('user', user);
+      },
+      function(err) {
+        console.log('err', err);
+      });
 
   };
 
