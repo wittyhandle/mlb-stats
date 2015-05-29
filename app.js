@@ -6,13 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Promise = require('bluebird');
 
-var routes = require('./routes/index');
+var api = require('./routes/api');
 var users = require('./routes/users');
 
-var bcrypt = require('bcryptjs');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var User = require('./models').user;
 
 var app = express();
 
@@ -31,59 +27,8 @@ app.use(cookieParser());
 // so that passport doesn't create sessions for static requests
 app.use(express.static(path.join(__dirname, 'public')));
 
-// passport configs
-app.use(require('express-session')({
-    secret: '94kskle0skskdos0dks300siklsl0',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 60000 * 10
-    }
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    
-    User.findOne({where: {username: username}}).then(function(user) {
-
-      if (user) {
-        
-        if (bcrypt.compareSync(password, user.password)) {
-          done(null, user);
-        } else {
-          console.log("Password does not match");
-          done(null, false);
-        }
-
-      } else {
-        done(null, false);
-      }
-
-    }).catch(function(error) {
-      done(error);
-    });    
-  }
-));
-
-passport.serializeUser(function(user, done) {
-  console.log("serializing " + user.username);
-  done(null, {id: user.id, username: user.username, role: user.role});
-});
-
-passport.deserializeUser(function(user, done) {
-  console.log("deserializing " + user);
-  done(null, user);
-});
-
-app.use('/', routes);
+app.use('/api', api);
 app.use('/users', users);
-
-app.post('/login', passport.authenticate('local'), function(req, res) {
-  res.send(req.user);
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
