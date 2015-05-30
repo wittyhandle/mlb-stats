@@ -8,13 +8,27 @@ var app = angular.module('mlb',
 app.config(['$httpProvider', 'jwtInterceptorProvider',
   function Config($httpProvider, jwtInterceptorProvider) {
 
-  jwtInterceptorProvider.tokenGetter = ['$window', function($window) {
-    return $window.sessionStorage.token;
-  }];
+    jwtInterceptorProvider.tokenGetter = ['$window', function($window) {
+      return $window.sessionStorage.token;
+    }];
 
-  $httpProvider.interceptors.push('jwtInterceptor');
+    $httpProvider.interceptors.push('jwtInterceptor');
+    $httpProvider.interceptors.push(['$q', '$injector', function($q, $injector) {
+      return {
+        'responseError': function(response) {
 
-}]);
+          if (response.status === 401) {
+            $injector.get('$state').go('login');
+          }
+
+          return $q.reject(response);
+
+        }
+      };
+    }]);
+
+  }
+]);
 
 app.run(['$rootScope', '$state', 'jwtHelper', '$window', function($rootScope, $state, jwtHelper, $window) {
 
