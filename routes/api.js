@@ -19,15 +19,10 @@ router.post('/authenticate', function(req, res) {
 
       if (bcrypt.compareSync(password, user.password)) {
 
-        console.log("Authentication successful");
-        var token = jwt.sign(user, config.jwt_secret, {
-          expiresInMinutes: 1440 // expires in 24 hours
-        });
-
+        var token = jwt.sign({userId: user.id}, config.jwt_secret, {expiresInMinutes: 60});
         res.json({success: true, message: 'authentication successful', token: token});
 
       } else {
-        console.log("Password does not match");
         res.json({ success: false, message: 'Authentication failed. Wrong password.' });
       }
 
@@ -39,13 +34,14 @@ router.post('/authenticate', function(req, res) {
 
 });
 
-/* authenticate and check token */
 
+/**
+ * authenticate and check token
+ */
 router.use(function(req, res, next) {
 
   var auth = authorization.parse(req.get('authorization'));
-
-  if (auth) {
+  if (auth && auth.values.length > 0) {
 
     var token = auth.values[0].token;
     jwt.verify(token, config.jwt_secret, function(err, decoded) {
@@ -57,10 +53,9 @@ router.use(function(req, res, next) {
       }
     });
 
-
   } else {
 
-    return res.status(403).send({
+    return res.status(401).send({
       success: false,
       message: 'No token provided.'
     });
