@@ -1,5 +1,6 @@
 var User = require('../models').user;
 var express = require('express');
+var authorization = require('auth-header');
 var router = express.Router();
 var jwt    = require('jsonwebtoken');
 var config = require('../common').config();
@@ -38,6 +39,39 @@ router.post('/authenticate', function(req, res) {
 
 });
 
+/* authenticate and check token */
+
+router.use(function(req, res, next) {
+
+  var auth = authorization.parse(req.get('authorization'));
+
+  if (auth) {
+
+    var token = auth.values[0].token;
+    jwt.verify(token, config.jwt_secret, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+
+  } else {
+
+    return res.status(403).send({
+      success: false,
+      message: 'No token provided.'
+    });
+
+  }
+
+});
+
+router.get('/projects', function(req, res, next) {
+  res.json({ title: 'aaaa' });
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

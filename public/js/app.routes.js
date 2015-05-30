@@ -16,6 +16,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: '/projects',
       templateUrl: 'js/projects/projects.html',
       controller: 'projectsController',
+      resolve: {
+        projects: ['projectService', function(projectService) {
+          return projectService.getProjects();
+        }]
+      },
       data: {
         protected: true,
         name: 'projects'
