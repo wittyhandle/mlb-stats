@@ -23,11 +23,17 @@ router.post('/authenticate', function(req, res) {
         res.json({success: true, message: 'authentication successful', token: token});
 
       } else {
-        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+        return res.status(401).send({
+          success: false,
+          message: 'Authentication failed. Invalid password.'
+        });
       }
 
     } else {
-      res.json({ success: false, message: 'Authentication failed. User not found.' });
+      return res.status(401).send({
+        success: false,
+        message: 'Authentication failed. No user found.'
+      });
     }
 
   });
