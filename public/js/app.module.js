@@ -40,6 +40,7 @@ app.run(['$rootScope', '$state', 'jwtHelper', '$window', function($rootScope, $s
       var token = $window.sessionStorage.token;
       if (!token || jwtHelper.isTokenExpired(token)) {
         event.preventDefault();
+        $window.sessionStorage.removeItem('token');
         $state.go('login');
       }
     }
