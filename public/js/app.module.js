@@ -1,7 +1,9 @@
 'use strict';
 
 var app = angular.module('mlb',
-  [ 'ui.router',
+  [ 'cdgd.auth',
+    'cdgd.projects',
+    'ui.router',
     'ui.bootstrap',
     'angular-jwt']);
 

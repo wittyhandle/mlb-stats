@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('authService', ['$q', '$http', '$window', function($q, $http, $window) {
+authModule.factory('authService', ['$q', '$http', '$window', function($q, $http, $window) {
 
   var login = function(creds) {
 

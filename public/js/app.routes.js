@@ -17,8 +17,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       templateUrl: 'js/projects/projects.html',
       controller: 'projectsController',
       resolve: {
-        projects: ['projectService', function(projectService) {
-          return projectService.getProjects();
+        projects: ['projectsService', function(projectsService) {
+          return projectsService.getProjects();
         }]
       },
       data: {

@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('projectService', ['$q', '$http', function($q, $http) {
+projectsModule.factory('projectsService', ['$q', '$http', function($q, $http) {
 
   var getProjects = function() {
 

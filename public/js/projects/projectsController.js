@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('projectsController', ['$scope', 'projects', function($scope, projects) {
+projectsModule.controller('projectsController', ['$scope', 'projects', function($scope, projects) {
 
   console.log('called');
   $scope.projects = projects;
