@@ -12,9 +12,11 @@ app.directive('cdgdLogin', [function() {
 
       lf.login = function(credentials) {
 
-        console.log('login called with', credentials);
         authService.login(credentials).then(
           function(user) {
+
+            // save the user to the rootscope for use by other directives
+
             $state.go('projects');
           },
           function(err) {
