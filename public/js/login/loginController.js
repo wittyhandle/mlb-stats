@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('loginController', ['$scope', 'authService', function($scope, authService) {
+app.controller('loginController', ['$scope', 'authService', '$state', function($scope, authService, $state) {
 
   $scope.credentials = {username: '', password: ''};
 
@@ -8,7 +8,7 @@ app.controller('loginController', ['$scope', 'authService', function($scope, aut
 
     authService.login(credentials).then(
       function(user) {
-        console.log('user', user);
+        $state.go('projects');
       },
       function(err) {
         console.log('err', err);
