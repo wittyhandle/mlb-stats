@@ -1,6 +1,8 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 
+$error-box-height: 68px;
+
 /* app css stylesheet */
 
 body {
@@ -42,4 +44,27 @@ a {
 
 .well {
   padding-bottom: 0;
+}
+
+form {
+  margin-top: 15px;
+}
+
+.alert-wrapper {
+
+  .alert {
+    margin-bottom: 0;
+  }
+
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.5s ease-in-out;
+  -moz-transition: max-height 0.5s ease-in-out;
+  -o-transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
+
+  &.show {
+    max-height: $error-box-height;
+  }
+
 }

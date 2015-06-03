@@ -9,6 +9,7 @@ app.directive('cdgdLogin', [function() {
       var lf = this;
 
       lf.credentials = {username: '', password: ''};
+      lf.invalidLogin = false;
 
       lf.login = function(credentials) {
 
@@ -20,7 +21,8 @@ app.directive('cdgdLogin', [function() {
             $state.go('projects');
           },
           function(err) {
-            console.log('err', err);
+            console.log('in error');
+            lf.invalidLogin = true;
           });
 
       };

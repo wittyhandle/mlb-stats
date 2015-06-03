@@ -1,7 +1,8 @@
 'use strict';
 
 var app = angular.module('mlb',
-  [ 'cdgd.auth',
+  [ 'ngAnimate',
+    'cdgd.auth',
     'cdgd.projects',
     'ui.router',
     'ui.bootstrap',
