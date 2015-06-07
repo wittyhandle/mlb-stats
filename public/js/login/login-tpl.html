@@ -1,29 +1,41 @@
 <div class="login container">
-  <div class="col-lg-7 center-block">
-    <h2>CDGD</h2>
-    <div class="well">
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+      <h2>CDGD</h2>
+      <div class="well">
 
-      <div class="alert-wrapper" ng-class="{'show': lf.invalidLogin}">
-        <div class="alert alert-danger">Error here.</div>
+        <form ng-submit="lf.login(lf.credentials)">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="lf.credentials.username">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="lf.credentials.password">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-lg-10 alert-wrapper">
+                <alert ng-repeat="alert in lf.alerts" type="{{alert.type}}">{{alert.msg}}</alert>
+              </div>
+
+              <div class="col-lg-2">
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+              </div>
+
+            </div>
+
+          </div>
+        </form>
       </div>
-
-      <form class="form-horizontal" ng-submit="lf.login(lf.credentials)">
-        <div class="form-group">
-          <div class="col-lg-12">
-            <input type="text" class="form-control" id="inputUsername" placeholder="Username" ng-model="lf.credentials.username">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-lg-12">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="lf.credentials.password">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-lg-12">
-            <button type="submit" class="btn btn-primary pull-right">Submit</button>
-          </div>
-        </div>
-      </form>
     </div>
   </div>
 </div>
