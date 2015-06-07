@@ -1,7 +1,13 @@
 'use strict';
 
+var underscore = angular.module('underscore', []);
+underscore.factory('_', function() {
+  return window._;
+});
+
 var app = angular.module('mlb',
-  [ 'ngAnimate',
+  [ 'underscore',
+    'ngAnimate',
     'cdgd.auth',
     'cdgd.projects',
     'ui.router',

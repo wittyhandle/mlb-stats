@@ -4,13 +4,12 @@ app.directive('cdgdLogin', [function() {
     bindToController: true,
     restrict: 'E',
     templateUrl: 'js/login/login-tpl.html',
-    controller: ['authService', '$state', function(authService, $state) {
+    controller: ['authService', '$state', '_', function(authService, $state, _) {
 
       var lf = this;
 
       lf.alerts = [];
       lf.credentials = {username: '', password: ''};
-      lf.invalidLogin = false;
 
       lf.login = function(credentials) {
 
@@ -22,8 +21,17 @@ app.directive('cdgdLogin', [function() {
             $state.go('projects');
           },
           function(err) {
-            lf.invalidLogin = true;
-            lf.alerts.push({msg: 'Invalid Login', type: 'danger'});
+
+            var loginErrors = _.filter(lf.alerts, function(alert) {
+              return (alert.code && alert.code === 'login.error');
+            });
+
+            if (loginErrors.length > 0) {
+              lf.alerts.splice(0, 1);
+            }
+
+            lf.alerts.push({msg: 'Invalid Login', type: 'danger', code: 'login.error'});
+
           });
 
       };
