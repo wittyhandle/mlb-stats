@@ -5,7 +5,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $stateProvider
     .state('login', {
       url: '/login',
-      template: '<cdgd-login></cdgd-login>',
+      views: {
+        'content' : {
+          template: '<cdgd-login></cdgd-login>',
+        }
+      },
       data: {
         protected: false,
         name: 'login'
@@ -13,8 +17,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     })
     .state('projects', {
       url: '/projects',
-      templateUrl: 'js/projects/projects.html',
-      controller: 'projectsController',
+
+      views: {
+        'header': {
+          templateUrl: 'js/partials/header.html'
+        },
+        'content': {
+          templateUrl: 'js/projects/projects.html',
+          controller: 'projectsController'
+        }
+      },
       resolve: {
         projects: ['projectsService', function(projectsService) {
           return projectsService.getProjects();
@@ -22,7 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       },
       data: {
         protected: true,
-        name: 'projects'
+          name: 'projects'
       }
     });
 
