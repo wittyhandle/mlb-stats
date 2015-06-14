@@ -40,10 +40,12 @@ app.config(['$httpProvider', 'jwtInterceptorProvider',
   }
 ]);
 
-app.run(['$rootScope', '$state', 'jwtHelper', '$window', function($rootScope, $state, jwtHelper, $window) {
+app.run(          ['$rootScope', '$state', 'jwtHelper', '$window', 'userService',
+          function($rootScope, $state, jwtHelper, $window, userService) {
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
+    console.log('in stateChangeStart');
     var isProtected = toState.data.protected;
     if (isProtected) {
 
@@ -52,6 +54,10 @@ app.run(['$rootScope', '$state', 'jwtHelper', '$window', function($rootScope, $s
         event.preventDefault();
         $window.sessionStorage.removeItem('token');
         $state.go('login');
+
+        /* if there's a token but no current user in the service (refresh occurred) save the user again */
+      } else if (token && !userService.getCurrentUser()) {
+        userService.storeCurrentUser(jwtHelper.decodeToken(token));
       }
     }
 

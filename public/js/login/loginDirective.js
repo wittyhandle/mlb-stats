@@ -15,8 +15,6 @@ app.directive('cdgdLogin', [function() {
 
         authService.login(credentials).then(
           function(user) {
-
-            // save the user to the rootscope for use by other directives
             userService.storeCurrentUser(user);
             $state.go('projects');
           },
