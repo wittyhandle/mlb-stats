@@ -19,7 +19,7 @@ router.post('/authenticate', function(req, res) {
 
       if (bcrypt.compareSync(password, user.password)) {
 
-        var token = jwt.sign({userId: user.id}, config.jwt_secret, {expiresInMinutes: 60});
+        var token = jwt.sign({userId: user.id, username: user.username}, config.jwt_secret, {expiresInMinutes: 60});
         res.json({success: true, message: 'authentication successful', token: token});
 
       } else {

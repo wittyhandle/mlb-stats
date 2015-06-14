@@ -20,7 +20,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
       views: {
         'header': {
-          templateUrl: 'js/partials/header.html'
+          template: '<cdgd-header></cdgd-header>'
         },
         'content': {
           templateUrl: 'js/projects/projects.html',

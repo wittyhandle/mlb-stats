@@ -4,7 +4,7 @@ app.directive('cdgdLogin', [function() {
     bindToController: true,
     restrict: 'E',
     templateUrl: 'js/login/login-tpl.html',
-    controller: ['authService', '$state', '_', function(authService, $state, _) {
+    controller: ['authService', 'userService', '$state', '_', function(authService, userService, $state, _) {
 
       var lf = this;
 
@@ -17,11 +17,13 @@ app.directive('cdgdLogin', [function() {
           function(user) {
 
             // save the user to the rootscope for use by other directives
-
+            userService.storeCurrentUser(user);
             $state.go('projects');
           },
           function(err) {
 
+            // look for the login error in the list of alerts and remove first before
+            // re-showing
             var loginErrors = _.filter(lf.alerts, function(alert) {
               return (alert.code && alert.code === 'login.error');
             });

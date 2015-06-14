@@ -1,6 +1,6 @@
 'use strict';
 
-authModule.factory('authService', ['$q', '$http', '$window', function($q, $http, $window) {
+authModule.factory('authService', ['$q', '$http', '$window', 'jwtHelper', function($q, $http, $window, jwtHelper) {
 
   var login = function(creds) {
 
@@ -8,12 +8,10 @@ authModule.factory('authService', ['$q', '$http', '$window', function($q, $http,
 
     $http.post('/api/authenticate', creds)
       .success(function(data, status, headers, config) {
-        console.log('secsjkss');
         $window.sessionStorage.token = data.token;
-        deferred.resolve(data);
+        deferred.resolve(jwtHelper.decodeToken(data.token));
       })
       .error(function(data, status, headers, config) {
-        console.log('bad auth');
         deferred.reject(status);
       });
 
