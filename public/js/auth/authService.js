@@ -22,7 +22,7 @@ authModule.factory('authService', ['$q', '$http', '$window', 'jwtHelper', '$stat
 
   var logout = function() {
     $window.sessionStorage.removeItem('token');
-    $state.go('login');
+    $state.go('root.login');
   };
 
   return {

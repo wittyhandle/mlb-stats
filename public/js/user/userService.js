@@ -5,7 +5,6 @@ userModule.factory('userService', [function() {
   var currentUser = null;
 
   var storeCurrentUser = function(user) {
-    console.log('current user', user);
     currentUser = user;
   };
 

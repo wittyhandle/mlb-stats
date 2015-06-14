@@ -28,7 +28,7 @@ app.config(['$httpProvider', 'jwtInterceptorProvider',
         'responseError': function(response) {
 
           if (response.status === 401) {
-            $injector.get('$state').go('login');
+            $injector.get('$state').go('root.login');
           }
 
           return $q.reject(response);
@@ -45,14 +45,14 @@ app.run(          ['$rootScope', '$state', 'jwtHelper', '$window', 'userService'
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
-    if (toState.data.protected) {
+    if (toState.data && toState.data.protected) {
 
       var token = $window.sessionStorage.token;
       if (!token || jwtHelper.isTokenExpired(token)) {
 
         event.preventDefault();
         $window.sessionStorage.removeItem('token');
-        $state.go('login');
+        $state.go('root.login');
 
         /* if there's a token but no current user in the service (browser reload occurred), save the user again */
       } else if (token && !userService.getCurrentUser()) {

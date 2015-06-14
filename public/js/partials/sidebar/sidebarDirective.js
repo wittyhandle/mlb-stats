@@ -5,13 +5,10 @@ app.directive('cdgdSidebar', [function() {
     link: function(scope, element, attrs) {
 
       // these should come from some service
-      var menuItems = [
-        {label: 'Projects', id: 'projects'},
-        {label: 'Users', id: 'users'}
+      scope.items = [
+        {label: 'Projects', id: 'root.projects'},
+        {label: 'Users', id: 'root.users'}
       ];
-
-      scope.items = menuItems;
-
     }
   };
 }]);
