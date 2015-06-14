@@ -22,6 +22,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         'header': {
           template: '<cdgd-header></cdgd-header>'
         },
+        'sidebar': {
+          template: '<cdgd-sidebar></cdgd-sidebar>'
+        },
         'content': {
           templateUrl: 'js/projects/projects.html',
           controller: 'projectsController'

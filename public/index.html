@@ -22,12 +22,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <!--
-  <div ui-view="navbar"></div>
-
-  <div class="main" ui-view="main"></div> -->
   <div ui-view="header"></div>
-  <div ui-view="content"></div>
+
+  <div class="container">
+    <div class="row">
+      <div ui-view="sidebar"></div>
+      <div ui-view="content"></div>
+    </div>
+  </div>
 
 
 
@@ -70,14 +72,8 @@
 
   <!-- partials -->
   <script src="js/partials/header/headerDirective.js"></script>
-
-  <!-- MAIN
-  <script src="js/main/state.js"></script>
-  <script src="js/main/controllers/HomeCtrl.js"></script>
-  <script src="js/main/controllers/AboutCtrl.js"></script>
-  <script src="js/main/controllers/ContactCtrl.js"></script>
-   -->
-
+  <script src="js/partials/sidebar/sidebarDirective.js"></script>
+  
   <script type='text/javascript' id="__bs_script__">//<![CDATA[
     document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.7.1.js'><\/script>".replace("HOST", location.hostname));
 //]]></script>
