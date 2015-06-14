@@ -45,17 +45,16 @@ app.run(          ['$rootScope', '$state', 'jwtHelper', '$window', 'userService'
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
-    console.log('in stateChangeStart');
-    var isProtected = toState.data.protected;
-    if (isProtected) {
+    if (toState.data.protected) {
 
       var token = $window.sessionStorage.token;
       if (!token || jwtHelper.isTokenExpired(token)) {
+
         event.preventDefault();
         $window.sessionStorage.removeItem('token');
         $state.go('login');
 
-        /* if there's a token but no current user in the service (refresh occurred) save the user again */
+        /* if there's a token but no current user in the service (browser reload occurred), save the user again */
       } else if (token && !userService.getCurrentUser()) {
         userService.storeCurrentUser(jwtHelper.decodeToken(token));
       }

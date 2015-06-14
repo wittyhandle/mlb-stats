@@ -1,6 +1,7 @@
 'use strict';
 
-authModule.factory('authService', ['$q', '$http', '$window', 'jwtHelper', function($q, $http, $window, jwtHelper) {
+authModule.factory('authService', ['$q', '$http', '$window', 'jwtHelper', '$state',
+  function($q, $http, $window, jwtHelper, $state) {
 
   var login = function(creds) {
 
@@ -19,8 +20,14 @@ authModule.factory('authService', ['$q', '$http', '$window', 'jwtHelper', functi
 
   };
 
+  var logout = function() {
+    $window.sessionStorage.removeItem('token');
+    $state.go('login');
+  };
+
   return {
-    login: login
+    login: login,
+    logout: logout
   };
 
 }]);
