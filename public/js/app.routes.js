@@ -20,7 +20,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     })
     .state('root.projects', {
       url: 'projects',
-
       views: {
         'content@': {
           templateUrl: 'js/projects/projects.html',
