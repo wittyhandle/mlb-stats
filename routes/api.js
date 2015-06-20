@@ -7,6 +7,40 @@ var config = require('../common').config();
 var bcrypt = require('bcryptjs');
 
 /**
+ * authenticate and check token
+ */
+var authFilter = function(req, res, next) {
+
+  var auth = authorization.parse(req.get('authorization'));
+  if (auth && auth.values.length > 0) {
+
+    var token = auth.values[0].token;
+    jwt.verify(token, config.jwt_secret, function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+
+    return res.status(401).send({
+      success: false,
+      message: 'No token provided.'
+    });
+
+  }
+
+};
+
+/**
+*   Users routing
+* */
+router.use('/users', authFilter, require('./users'));
+
+/**
  * Takes the credentials, validates them and returns a
  * jwt if legit.
  */
@@ -40,35 +74,7 @@ router.post('/authenticate', function(req, res) {
 
 });
 
-
-/**
- * authenticate and check token
- */
-router.use(function(req, res, next) {
-
-  var auth = authorization.parse(req.get('authorization'));
-  if (auth && auth.values.length > 0) {
-
-    var token = auth.values[0].token;
-    jwt.verify(token, config.jwt_secret, function(err, decoded) {
-      if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
-      } else {
-        req.decoded = decoded;
-        next();
-      }
-    });
-
-  } else {
-
-    return res.status(401).send({
-      success: false,
-      message: 'No token provided.'
-    });
-
-  }
-
-});
+router.use(authFilter);
 
 router.get('/projects', function(req, res, next) {
   res.json({ title: 'aaaa' });
@@ -78,22 +84,5 @@ router.get('/projects', function(req, res, next) {
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Monkey' });
 });
-
-router.get('/secret', loggedIn, function(req, res) {
-  res.send({secret: 'shhh!'});
-});
-
-router.get('/signin', function(req, res, next) {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ name: 'mike' }));
-});
-
-function loggedIn(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.status(401).send('Unauthorized');
-    }
-}
 
 module.exports = router;
