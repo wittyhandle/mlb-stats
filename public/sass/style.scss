@@ -1,5 +1,6 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
+$transition-speed: .2s;
 
 /* app css stylesheet */
 
@@ -43,7 +44,7 @@ form {
       }
 
       &.ng-enter.ng-enter-active {
-        opacity:1;
+        opacity: 1;
       }
 
     }
@@ -53,6 +54,20 @@ form {
 
 button {
   outline: none;
+}
+
+.users-list {
+
+  opacity: 1;
+
+  &.ng-hide {
+    opacity: 0;
+  }
+
+  &.ng-hide-remove-active {
+    transition: $transition-speed linear all;
+  }
+
 }
 
 .spinner {
@@ -70,8 +85,8 @@ button {
   bottom: 200px;
   right: 0;
 
-  -webkit-transition: 0.2s linear all;
-  transition: 0.2s linear all;
+  -webkit-transition: $transition-speed linear all;
+  transition: $transition-speed linear all;
 
   &.reveal {
     opacity: 1;

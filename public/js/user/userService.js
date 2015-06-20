@@ -18,7 +18,7 @@ userModule.factory('userService', ['$timeout', '$q', function($timeout, $q) {
 
     $timeout(function() {
       deferred.resolve([{id: 1, user: 'fred'}]);
-    }, 3000);
+    }, 1000);
 
     return deferred.promise;
 
