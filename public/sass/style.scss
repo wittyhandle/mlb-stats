@@ -55,8 +55,21 @@ button {
   outline: none;
 }
 
-.fa-circle-o-notch {
-  color: #007196;
-  font-size: 20em;
-  opacity: .2;
+.spinner {
+
+  opacity: 0;
+  -webkit-transition: 0.2s linear all;
+  transition: 0.2s linear all;
+
+  &.reveal {
+    opacity: 1;
+  }
+
+  .fa-circle-o-notch {
+    color: #007196;
+    font-size: 20em;
+    opacity: .2;
+  }
+
 }
+

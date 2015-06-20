@@ -1,6 +1,6 @@
 'use strict';
 
-userModule.factory('userService', [function() {
+userModule.factory('userService', ['$timeout', '$q', function($timeout, $q) {
 
   var currentUser = null;
 
@@ -12,9 +12,22 @@ userModule.factory('userService', [function() {
     return currentUser;
   };
 
+  var getUsers = function() {
+
+    var deferred = $q.defer();
+
+    $timeout(function() {
+      deferred.resolve([{id: 1, user: 'fred'}]);
+    }, 5000);
+
+    return deferred.promise;
+
+  };
+
   return {
     storeCurrentUser: storeCurrentUser,
-    getCurrentUser: getCurrentUser
+    getCurrentUser: getCurrentUser,
+    getUsers: getUsers
   };
 
 }]);

@@ -1,21 +1,42 @@
-app.directive('cdgdUsers', ['$timeout', function($timeout) {
+app.directive('cdgdUsers', ['$timeout', 'userService', function($timeout, userService) {
+
   return {
     restrict: 'E',
     templateUrl: 'js/partials/users/users-tpl.html',
-    controller: ['$scope', function($scope) {
-
-
-
-    }],
     link: function(scope, element, attrs) {
 
-      scope.busy = true;
+      //scope.loaded = false;
+      //$timeout(function(){
+      //
+      //  scope.busy = true;
+      //  $timeout(function(){
+      //
+      //    scope.busy = false;
+      //    scope.loaded = true;
+      //    console.log('busy is now', scope.busy);
+      //
+      //  }, 1000);
+      //
+      //}, 100);
 
-      $timeout(function(){
+      scope.busy = false;
+      scope.busy = true;
+      var users = userService.getUsers().then(function(users) {
+        console.log('users', users);
         scope.busy = false;
-        scope.thing = 'this';
-      }, 2000);
+      });
+
+
+      //scope.makeCall = function() {
+      //  scope.busy = true;
+      //
+      //  $timeout(function(){
+      //    scope.busy = false;
+      //    scope.thing = 'this';
+      //  }, 1000);
+      //}
 
     }
   };
+
 }]);
