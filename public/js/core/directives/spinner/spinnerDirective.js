@@ -10,27 +10,19 @@ app.directive('cdgdSpinner', ['$timeout', function($timeout) {
 
       var showTimer;
 
-      scope.$watch('show', function(newVal, oldVal) {
-        //console.log('oldVal is ' + oldVal + ' and newVal is ' + newVal);
-        //if (newVal !== oldVal) {
-          newVal ? showSpinner() : hideSpinner();
-        //} else {
-        //  console.log('values match', newVal);
-        //  showSpinner();
-        //}
-
+      scope.$watch('show', function(newVal) {
+        newVal ? showSpinner() : hideSpinner();
       });
 
       function showSpinner() {
 
         if (showTimer) {
-          console.log('return from showSpinner early');
           return;
         }
-        //console.log(elem.css());
+
         //Set up a timeout based on our configured delay to show the element (our spinner)
         showTimer = $timeout(showElement.bind(this, true), getDelay());
-        //showElement(true);
+
       }
 
       function hideSpinner() {
@@ -40,14 +32,11 @@ app.directive('cdgdSpinner', ['$timeout', function($timeout) {
           $timeout.cancel(showTimer);
         }
 
-        //showTimer = null;
         showElement(false);
 
       }
 
       function showElement(show) {
-        console.log('ready to showElement', show);
-        //show ? elem.css({display:'block'}) : elem.css({display:'none'});
 
         if (show) {
           elem.find('div').addClass('reveal');
