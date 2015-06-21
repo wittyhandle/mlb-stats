@@ -7,7 +7,7 @@ var express = require('express'),
 router.get('/', function(req, res, next) {
 
   var allUsers = [];
-  User.findAll({attributes: ['id', 'username']}).then(function(users) {
+  User.findAll({attributes: ['id', 'username', 'firstName', 'lastName']}).then(function(users) {
 
     _.forEach(users, function(userRec) {
       allUsers.push(userRec.dataValues);
