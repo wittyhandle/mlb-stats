@@ -5,10 +5,11 @@ app.directive('cdgdUsers', ['$timeout', 'userService', function($timeout, userSe
     templateUrl: 'js/partials/users/users-tpl.html',
     link: function(scope, element, attrs) {
 
-      scope.busy = true;
+      scope.users = null;
 
-      var users = userService.getUsers().then(function(users) {
-        scope.busy = false;
+      userService.getUsers().then(function(users) {
+        console.log(users);
+        scope.users = users;
       });
     }
   };

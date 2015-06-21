@@ -1,6 +1,6 @@
 'use strict';
 
-userModule.factory('userService', ['$timeout', '$q', function($timeout, $q) {
+userModule.factory('userService', ['$http', '$q', function($http, $q) {
 
   var currentUser = null;
 
@@ -16,9 +16,13 @@ userModule.factory('userService', ['$timeout', '$q', function($timeout, $q) {
 
     var deferred = $q.defer();
 
-    $timeout(function() {
-      deferred.resolve([{id: 1, user: 'fred'}]);
-    }, 1000);
+    $http.get('/api/users')
+      .success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      })
+      .error(function(data, status, headers, config) {
+        deferred.reject(status);
+      });
 
     return deferred.promise;
 

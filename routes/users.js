@@ -1,9 +1,21 @@
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    User = require('../models').user,
+    _ = require('lodash');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.json({ id: 3, username: 'Fred' });
+
+  var allUsers = [];
+  User.findAll({attributes: ['id', 'username']}).then(function(users) {
+
+    _.forEach(users, function(userRec) {
+      allUsers.push(userRec.dataValues);
+    });
+
+    res.json(allUsers);
+  });
+
 });
 
 module.exports = router;
