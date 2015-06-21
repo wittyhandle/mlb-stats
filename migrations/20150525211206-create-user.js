@@ -28,6 +28,7 @@ module.exports = {
       }
     }).then(function() {
 
+      console.log('run insert');
       var password = bcrypt.hashSync('secret', 8);
       var insert = "insert into users (username, password, createdAt, updatedAt) values ('admin', '" + password + "', now(), now())";
 
