@@ -70,6 +70,11 @@ router.post('/authenticate', function(req, res) {
       });
     }
 
+  }, function(err) {
+    return res.status(500).send({
+      success: false,
+      message: 'An error occurred authenticating user: ' + err.message
+    });
   });
 
 });
