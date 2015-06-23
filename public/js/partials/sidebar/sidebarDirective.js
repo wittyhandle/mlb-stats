@@ -6,8 +6,8 @@ app.directive('cdgdSidebar', [function() {
 
       // these should come from some service
       scope.items = [
-        {label: 'Projects', id: 'root.projects'},
-        {label: 'Users', id: 'root.users'}
+        {label: 'Projects', id: 'root.admin.projects'},
+        {label: 'Users', id: 'root.admin.users'}
       ];
     }
   };

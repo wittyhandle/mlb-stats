@@ -7,21 +7,26 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('root', {
       url: '/',
       views: {
-        //'header': {
-        //  template: '<cdgd-header></cdgd-header>'
-        //},
-        'sidebar': {
-          template: '<cdgd-sidebar></cdgd-sidebar>'
-        },
-        'content': {
-          template: ''
+        'cdgd-root': {
+          templateUrl: 'js/partials/root/wrapper-tpl.html'
         }
       }
     })
-    .state('root.projects', {
+    .state('root.admin', {
+      abstract: true,
+      views: {
+        'content@root': {
+          template: ''
+        },
+        'sidebar@root': {
+          template: '<cdgd-sidebar></cdgd-sidebar>'
+        }
+      }
+    })
+    .state('root.admin.projects', {
       url: 'projects',
       views: {
-        'content@': {
+        'content@root': {
           templateUrl: 'js/projects/projects.html',
           controller: 'projectsController'
         }
@@ -36,28 +41,24 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         name: 'projects'
       }
     })
-    .state('root.users', {
+    .state('root.admin.users', {
       url: 'users',
       views: {
-        'content@': {
+        'content@root': {
           template: '<cdgd-users></cdgd-users>'
         }
       },
       data: {
-        protected: true,
-        name: 'projects'
+        protected: true
       }
     })
     .state('root.login', {
       url: 'login',
       views: {
-        //'header@': {
-        //  template: ''
-        //},
-        'sidebar@': {
+        'sidebar@root': {
           template: ''
         },
-        'content@' : {
+        'content@root' : {
           template: '<cdgd-login></cdgd-login>',
         }
       },

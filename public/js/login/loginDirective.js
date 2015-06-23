@@ -16,7 +16,7 @@ app.directive('cdgdLogin', [function() {
         authService.login(credentials).then(
           function(user) {
             userService.storeCurrentUser(user);
-            $state.go('root.projects');
+            $state.go('root.admin.projects');
           },
           function(err) {
 

@@ -195,6 +195,14 @@ button {
     text-indent: 20px;
     line-height: 40px;
 
+    &.active {
+      a {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255,255,255,0.2);
+      }
+    }
+
     a {
       display: block;
       text-decoration: none;
