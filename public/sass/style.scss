@@ -222,10 +222,13 @@ button {
 
   }
 
-  >.sidebar-brand {
+  >.sidebar-brand, >.sidebar-login {
+
     height: 65px;
     font-size: 18px;
-    line-height: 60px;
+    line-height: 65px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 
     a {
       color: #999999;
@@ -235,6 +238,18 @@ button {
         background: none;
       }
 
+    }
+  }
+
+  >.sidebar-login {
+
+    font-size: 14px;
+    font-style: italic;
+
+    a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
   }

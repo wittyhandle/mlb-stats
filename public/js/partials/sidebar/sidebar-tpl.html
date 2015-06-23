@@ -1,9 +1,10 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
     <li class="sidebar-brand">
-      <a href="#">
-        Start Bootstrap
-      </a>
+      <a href="#">CDGD Admin</a>
+    </li>
+    <li class="sidebar-login">
+      <a href="#logout" ng-click="performLogout()">{{login}}</a>
     </li>
     <li ui-sref-active="active" ng-repeat="item in items">
       <a ui-sref="{{item.id}}" href="">{{item.label}}</a>
