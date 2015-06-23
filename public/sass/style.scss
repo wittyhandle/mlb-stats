@@ -2,17 +2,25 @@ $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
 $transition-speed: .2s;
 
+//$_768: "(min-width: 768px)";
+
+@mixin _768 {
+  @media(min-width:768px) {
+    @content;
+  }
+}
+
 /* app css stylesheet */
 
-body {
-  margin: 0;
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+//body {
+//  margin: 0;
+//  padding: 50px;
+//  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+//}
 
-.container {
-  margin: 0 auto;
-}
+//.container {
+//  margin: 0 auto;
+//}
 
 .main {
   clear:both;
@@ -100,3 +108,127 @@ button {
 
 }
 
+/* simple sidebar */
+
+#sidebar-wrapper {
+
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+  @include _768 {
+    width: 250px;
+  }
+
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+
+  @include _768 {
+    padding: 20px;
+    position: relative;
+  }
+
+}
+
+#wrapper {
+
+  padding-left: 0;
+
+  @include _768 {
+    padding-left: 250px;
+  }
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+  &.toggled {
+
+    padding-left: 250px;
+
+    @include _768 {
+      padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+      width: 0;
+    }
+
+    #page-content-wrapper {
+      position: absolute;
+      margin-right: -250px;
+
+      @include _768 {
+        position: relative;
+        margin-right: 0;
+      }
+
+    }
+
+  }
+
+}
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    text-indent: 20px;
+    line-height: 40px;
+
+    a {
+      display: block;
+      text-decoration: none;
+      color: #999999;
+
+      &:hover {
+        text-decoration: none;
+        color: #fff;
+        background: rgba(255,255,255,0.2);
+      }
+
+      &:active, &:focus {
+        text-decoration: none;
+      }
+
+    }
+
+  }
+
+  >.sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+
+    a {
+      color: #999999;
+
+      &:hover {
+        color: #fff;
+        background: none;
+      }
+
+    }
+
+  }
+
+}

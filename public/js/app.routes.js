@@ -7,9 +7,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('root', {
       url: '/',
       views: {
-        'header': {
-          template: '<cdgd-header></cdgd-header>'
-        },
+        //'header': {
+        //  template: '<cdgd-header></cdgd-header>'
+        //},
         'sidebar': {
           template: '<cdgd-sidebar></cdgd-sidebar>'
         },
@@ -51,9 +51,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('root.login', {
       url: 'login',
       views: {
-        'header@': {
-          template: ''
-        },
+        //'header@': {
+        //  template: ''
+        //},
         'sidebar@': {
           template: ''
         },
@@ -65,7 +65,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         protected: false,
         name: 'login'
       }
-    })
-    ;
+    });
 
 }]);

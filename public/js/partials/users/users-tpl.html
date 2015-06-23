@@ -1,24 +1,22 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h2 class="sub-header">Users</h2>
-  <div class="table-responsive">
-    <cdgd-spinner show="users == null"></cdgd-spinner>
-    <table class="table table-striped users-list ng-hide" ng-show="users != null">
-      <thead>
-      <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="u in users">
-        <td>{{u.id}}</td>
-        <td>{{u.username}}</td>
-        <td>{{u.firstName}}</td>
-        <td>{{u.lastName}}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+<h2 class="sub-header">Users</h2>
+<div class="table-responsive">
+  <cdgd-spinner show="users == null"></cdgd-spinner>
+  <table class="table table-striped users-list ng-hide" ng-show="users != null">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="u in users">
+      <td>{{u.id}}</td>
+      <td>{{u.username}}</td>
+      <td>{{u.firstName}}</td>
+      <td>{{u.lastName}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
