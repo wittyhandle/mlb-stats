@@ -6,11 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
     .state('root', {
       url: '/',
-      views: {
-        'cdgd-root': {
-          templateUrl: 'js/partials/root/wrapper-tpl.html'
-        }
-      }
+      templateUrl: 'js/partials/root/wrapper-tpl.html'
     })
     .state('root.admin', {
       abstract: true,
