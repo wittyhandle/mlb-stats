@@ -1,26 +1,12 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
-$transition-speed: .4s;
-
-//$_768: "(min-width: 768px)";
+$transition-speed: .2s;
 
 @mixin _768 {
   @media(min-width:768px) {
     @content;
   }
 }
-
-/* app css stylesheet */
-
-//body {
-//  margin: 0;
-//  padding: 50px;
-//  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-//}
-
-//.container {
-//  margin: 0 auto;
-//}
 
 .main {
   clear:both;
@@ -41,13 +27,13 @@ form {
     .alert {
 
       margin-bottom: 0;
-      padding: 9.5px 15px;
+      padding: 8px 15px;
       font-size: 15px;
       text-align: center;
 
       &.ng-enter {
-        -webkit-transition:0.5s linear all;
-        transition:0.5s linear all;
+        -webkit-transition: 0.5s linear all;
+        transition: 0.5s linear all;
         opacity: 0;
       }
 
@@ -64,16 +50,24 @@ button {
   outline: none;
 }
 
-.users-list {
+.single-user {
 
-  opacity: 1;
+  //opacity: 1;
+  //transition: $transition-speed linear all;
+  //-webkit-transition: $transition-speed linear all;
+  //
+  //&.ng-hide {
+  //  opacity: 0;
+  //}
 
-  &.ng-hide {
+  &.ng-enter {
+    -webkit-transition: 0.5s linear all;
+    transition: 0.5s linear all;
     opacity: 0;
   }
 
-  &.ng-hide-remove-active {
-    transition: $transition-speed linear all;
+  &.ng-enter.ng-enter-active {
+    opacity: 1;
   }
 
 }
@@ -106,6 +100,11 @@ button {
     opacity: .2;
   }
 
+}
+
+.no-animate {
+  -webkit-transition: none !important;
+  transition: none !important;
 }
 
 /* simple sidebar */

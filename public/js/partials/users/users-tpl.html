@@ -1,8 +1,8 @@
 <h2 class="sub-header">Users</h2>
 <div class="table-responsive">
   <cdgd-spinner show="users == null"></cdgd-spinner>
-  <table class="table table-striped users-list ng-hide" ng-show="users != null">
-    <thead>
+  <table class="table table-striped">
+    <thead class="users-list">
     <tr>
       <th>ID</th>
       <th>Username</th>
@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="u in users">
+    <tr class="single-user" ng-repeat="u in users">
       <td>{{u.id}}</td>
       <td>{{u.username}}</td>
       <td>{{u.firstName}}</td>
