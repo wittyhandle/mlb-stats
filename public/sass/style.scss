@@ -1,6 +1,6 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
-$transition-speed: .2s;
+$transition-speed: .4s;
 
 //$_768: "(min-width: 768px)";
 
@@ -151,6 +151,17 @@ button {
     padding-left: 250px;
   }
 
+  &.login {
+    padding-left: 0;
+
+    .row {
+      text-align:center;
+    }
+
+
+
+  }
+
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -254,4 +265,13 @@ button {
 
   }
 
+}
+
+.col-centered {
+  display:inline-block;
+  float:none;
+  /* reset the text-align */
+  text-align:left;
+  /* inline-block space fix */
+  margin-right:-4px;
 }

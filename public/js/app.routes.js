@@ -49,7 +49,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         }
       },
       data: {
-        protected: true
+        protected: true,
+        name: 'users'
       }
     })
     .state('root.login', {

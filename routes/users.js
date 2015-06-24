@@ -13,7 +13,9 @@ router.get('/', function(req, res, next) {
       allUsers.push(userRec.dataValues);
     });
 
-    res.json(allUsers);
+    setTimeout(function() {res.json(allUsers);}, 2000);
+
+
   });
 
 });
