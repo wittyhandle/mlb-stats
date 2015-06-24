@@ -1,4 +1,4 @@
-app.directive('cdgdUsers', ['$timeout', 'userService', function($timeout, userService) {
+app.directive('cdgdUsers', ['userService', function(userService) {
 
   return {
     restrict: 'E',
@@ -8,7 +8,6 @@ app.directive('cdgdUsers', ['$timeout', 'userService', function($timeout, userSe
       scope.users = null;
 
       userService.getUsers().then(function(users) {
-        console.log(users);
         scope.users = users;
       });
     }
