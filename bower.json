@@ -14,7 +14,8 @@
     "angular-jwt": "~0.0.8",
     "angular-animate": "~1.4.0",
     "underscore": "~1.8.3",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.3.0",
+    "bootswatch-dist": "yeti"
   },
   "resolutions": {
     "angular": ">= 1.0.8"
