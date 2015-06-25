@@ -1,5 +1,7 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #333;
+$sidebar-color: #33332D;
+$sidebar-background: #FFF8E3;
 $transition-speed: .2s;
 
 @mixin _768 {
@@ -52,14 +54,6 @@ button {
 
 .single-user {
 
-  //opacity: 1;
-  //transition: $transition-speed linear all;
-  //-webkit-transition: $transition-speed linear all;
-  //
-  //&.ng-hide {
-  //  opacity: 0;
-  //}
-
   &.ng-enter {
     -webkit-transition: 0.5s linear all;
     transition: 0.5s linear all;
@@ -102,11 +96,6 @@ button {
 
 }
 
-.no-animate {
-  -webkit-transition: none !important;
-  transition: none !important;
-}
-
 /* simple sidebar */
 
 #sidebar-wrapper {
@@ -118,7 +107,7 @@ button {
   height: 100%;
   margin-left: -250px;
   overflow-y: auto;
-  background: #000;
+  background: $sidebar-background;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -194,6 +183,7 @@ button {
 }
 
 .sidebar-nav {
+
   position: absolute;
   top: 0;
   width: 250px;
@@ -208,20 +198,24 @@ button {
     &.active {
       a {
         text-decoration: none;
-        color: #fff;
-        background: rgba(255,255,255,0.2);
+        color: lighten($sidebar-color, 80%);
+        background: #9FB4CC;
+
+        &:hover {
+          color: lighten($sidebar-color, 80%);
+        }
+
       }
     }
 
     a {
       display: block;
       text-decoration: none;
-      color: #999999;
+      color: $sidebar-color;
 
       &:hover {
         text-decoration: none;
-        color: #fff;
-        background: rgba(255,255,255,0.2);
+        color: lighten($sidebar-color, 25%);
       }
 
       &:active, &:focus {
@@ -240,15 +234,8 @@ button {
 
     border-bottom: 1px solid rgba(255,255,255,0.2);
 
-    a {
-      color: #999999;
+    color: darken(#9FB4CC, 20%);
 
-      &:hover {
-        color: #fff;
-        background: none;
-      }
-
-    }
   }
 
   >.sidebar-login {
