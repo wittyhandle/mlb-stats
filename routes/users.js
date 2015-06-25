@@ -13,8 +13,7 @@ router.get('/', function(req, res, next) {
       allUsers.push(userRec.dataValues);
     });
 
-    setTimeout(function() {res.json(allUsers);}, 2000);
-
+    res.json(allUsers);
 
   });
 
