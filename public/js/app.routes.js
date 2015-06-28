@@ -37,16 +37,32 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         name: 'projects'
       }
     })
-    .state('root.admin.users', {
-      url: 'users',
+    .state('root.admin.user', {
+      abstract: true,
       views: {
         'content@root': {
-          template: '<cdgd-users></cdgd-users>'
+          template: '<cdgd-user></cdgd-user>'
         }
       },
       data: {
         protected: true,
-        name: 'users'
+        name: 'user'
+      }
+    })
+    .state('root.admin.user.list', {
+      url: 'user',
+      views: {
+        'userBody@root.admin.user': {
+          template: '<cdgd-user-list></cdgd-user-list>'
+        }
+      }
+    })
+    .state('root.admin.user.add', {
+      url: 'user/add',
+      views: {
+        'userBody@root.admin.user': {
+          template: '<cdgd-user-add></cdgd-user-add>'
+        }
       }
     })
     .state('root.login', {
