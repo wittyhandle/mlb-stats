@@ -39,6 +39,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     })
     .state('root.admin.user', {
       abstract: true,
+      url: 'user',
       views: {
         'content@root': {
           template: '<cdgd-user></cdgd-user>'
@@ -50,7 +51,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       }
     })
     .state('root.admin.user.list', {
-      url: 'user',
+      url: '/list',
       views: {
         'userBody@root.admin.user': {
           template: '<cdgd-user-list></cdgd-user-list>'
@@ -58,7 +59,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       }
     })
     .state('root.admin.user.add', {
-      url: 'user/add',
+      url: '/add',
       views: {
         'userBody@root.admin.user': {
           template: '<cdgd-user-add></cdgd-user-add>'

@@ -63,8 +63,12 @@ app.run(          ['$rootScope', '$state', 'jwtHelper', '$window', 'userService'
   });
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, fromState, fromParams) {
-    //console.log('the toState', toState);
+
+    console.log('the toState', $state);
+    console.log('the toState', $state.includes('root.admin.user'));
     $rootScope.containerClass = toState.data.name;
   });
+
+  $rootScope.$state = $state;
 
 }]);
