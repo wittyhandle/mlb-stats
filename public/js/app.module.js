@@ -28,7 +28,7 @@ app.config(['$httpProvider', 'jwtInterceptorProvider',
         'responseError': function(response) {
 
           if (response.status === 401) {
-            $injector.get('$state').go('root.login');
+            $injector.get('$state').go('login');
           }
 
           return $q.reject(response);
@@ -52,7 +52,7 @@ app.run(          ['$rootScope', '$state', 'jwtHelper', '$window', 'userService'
 
         event.preventDefault();
         $window.sessionStorage.removeItem('token');
-        $state.go('root.login');
+        $state.go('login');
 
         /* if there's a token but no current user in the service (browser reload occurred), save the user again */
       } else if (token && !userService.getCurrentUser()) {

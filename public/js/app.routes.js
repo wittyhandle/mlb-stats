@@ -4,7 +4,40 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $urlRouterProvider.when('', '/login');
   $stateProvider
 
-    .state('root', {
+    .state('login', {
+      url: '/login',
+      template: '<cdgd-login></cdgd-login>',
+      data: {
+        protected: false,
+        name: 'login'
+      }
+    })
+    .state('admin', {
+      abstract: true,
+      templateUrl: 'js/partials/root/wrapper-tpl.html'
+    })
+      .state('admin.user', {
+        url: '/user',
+        template: '<cdgd-user></cdgd-user>',
+        data: {
+          protected: true,
+          name: 'user'
+        }
+      })
+        .state('admin.user.list', {
+          url: '/list',
+          template: '<cdgd-user-list></cdgd-user-list>',
+          data: {
+            protected: true,
+            name: 'user'
+          }
+        })
+        .state('admin.user.new', {
+          url: '/new',
+          template: '<cdgd-user-add></cdgd-user-add>'
+        });
+
+/*    .state('root', {
       url: '/',
       templateUrl: 'js/partials/root/wrapper-tpl.html'
     })
@@ -80,6 +113,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         protected: false,
         name: 'login'
       }
-    });
+    });*/
 
 }]);

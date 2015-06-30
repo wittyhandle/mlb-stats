@@ -1,4 +1,4 @@
-app.directive('cdgdSidebar', ['userService', 'authService', function(userService, authService) {
+app.directive('cdgdSidebar', ['userService', 'authService', '$state', function(userService, authService, $state) {
   return {
     restrict: 'E',
     templateUrl: 'js/partials/sidebar/sidebar-tpl.html',
@@ -6,17 +6,25 @@ app.directive('cdgdSidebar', ['userService', 'authService', function(userService
 
       // these should come from some service
 
-      // TODO when projects get sorted out, remove stateId and use parent of state
       scope.items = [
-        {label: 'Projects', id: 'root.admin.projects', stateId: 'root.admin.projects'},
-        {label: 'Users', id: 'root.admin.user.list', stateId: 'root.admin.user'}
+        {label: 'Projects', id: 'admin.projects', root: 'projects'},
+        {label: 'Users', id: 'admin.user.list', root: 'users'}
       ];
 
       scope.login = userService.getCurrentUser().firstName + ' ' + userService.getCurrentUser().lastName;
 
       scope.performLogout = function() {
         authService.logout();
-      }
+      };
+
+      scope.isActive = function(item) {
+
+        var currentSection = $state.current.name.split('.')[1];
+        var itemSection = item.id.split('.')[1];
+
+        return currentSection === itemSection;
+
+      };
 
     }
   };
