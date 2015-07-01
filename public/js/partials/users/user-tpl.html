@@ -1,5 +1,8 @@
 <div class="heading clearfix">
   <h2 class="heading-label pull-left">Users</h2>
-  <a class="btn btn-primary btn-xs pull-right" ui-sref="admin.user.new">Add User</a>
+  <a
+    class="btn btn-primary btn-xs pull-right"
+    ui-sref="admin.user.new"
+    ng-show="$state.current.name === 'admin.user.list'">Add User</a>
 </div>
 <div ui-view></div>
