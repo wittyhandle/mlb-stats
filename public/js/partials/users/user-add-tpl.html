@@ -15,7 +15,7 @@
 
               <div class="form-group">
                 <label for="firstName" class="col-lg-3 control-label">First Name</label>
-                <div class="col-lg-9">
+                <div class="user-field col-lg-9">
                   <input
                     type="text"
                     class="form-control input-sm"
@@ -35,7 +35,7 @@
 
               <div class="form-group">
                 <label for="lastName" class="col-lg-3 control-label">Last Name</label>
-                <div class="col-lg-9">
+                <div class="user-field col-lg-9">
                   <input
                     type="text"
                     class="form-control input-sm"
@@ -47,7 +47,7 @@
                     ng-focus="clearValidation()">
                 </div>
 
-                <div ng-messages="newUser.firstName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
+                <div ng-messages="newUser.lastName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
                   <div class="message" ng-message="required"><alert type="danger">Please enter a last name</alert></div>
                 </div>
 
@@ -55,18 +55,19 @@
 
               <div class="form-group">
                 <label for="userName" class="col-lg-3 control-label">Username</label>
-                <div class="col-lg-9">
+                <div class="user-field col-lg-9">
                   <input
                     type="text"
                     class="form-control input-sm"
                     id="userName"
+                    name="userName"
                     ng-required="true"
                     ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }"
                     ng-model="user.username"
                     ng-focus="clearValidation()">
                 </div>
 
-                <div ng-messages="newUser.firstName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
+                <div ng-messages="newUser.userName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
                   <div class="message" ng-message="required"><alert type="danger">Please enter a username</alert></div>
                 </div>
 
@@ -74,18 +75,19 @@
 
               <div class="form-group">
                 <label for="password1" class="col-lg-3 control-label">Password</label>
-                <div class="col-lg-9">
+                <div class="user-field col-lg-9">
                   <input
                     type="password"
                     class="form-control input-sm"
                     id="password1"
+                    name="password1"
                     ng-model="user.password1"
                     ng-required="true"
                     ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }"
                     ng-focus="clearValidation()">
                 </div>
 
-                <div ng-messages="newUser.firstName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
+                <div ng-messages="newUser.password1.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
                   <div class="message" ng-message="required"><alert type="danger">Please enter a password</alert></div>
                 </div>
 
@@ -93,18 +95,21 @@
 
               <div class="form-group">
                 <label for="password2" class="col-lg-3 control-label">Confirm Password</label>
-                <div class="col-lg-9">
+                <div class="user-field col-lg-9">
                   <input
                     type="password"
                     class="form-control input-sm"
                     id="password2"
+                    name="password2"
                     ng-model="user.password2"
                     ng-required="true"
+                    password-match-validator
                     ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }">
                 </div>
 
-                <div ng-messages="newUser.firstName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
+                <div ng-messages="newUser.password2.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
                   <div class="message" ng-message="required"><alert type="danger">Please enter a confirmation password</alert></div>
+                  <div class="message" ng-message="password-match"><alert type="danger">Passwords do not match</alert></div>
                 </div>
 
               </div>

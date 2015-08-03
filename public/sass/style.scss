@@ -287,6 +287,11 @@ button {
   font-size: 12px;
 }
 
-.admin-alerts {
-  margin-top: 5px;
+.new-user {
+
+  .form-group {
+    .user-field {
+      margin-bottom: 5px;
+    }
+  }
 }
