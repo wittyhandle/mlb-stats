@@ -28,13 +28,37 @@ userModule.factory('userService', ['$http', '$q', function($http, $q) {
 
   };
 
+  var addUser = function(user) {
+
+    var deferred = $q.defer();
+
+    $http.post('/api/users/create', user)
+      .success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      })
+      .error(function(data, status, headers, config) {
+        deferred.reject(status);
+      });
+
+    return deferred.promise;
+
+  };
+
   var userExists = function(username) {
 
     var deferred = $q.defer();
 
     $http.get('/api/users/exists/' + username)
       .success(function(data, status, headers, config) {
-        deferred.resolve(data);
+
+        if (data.found == true) {
+          console.log('reject it');
+          deferred.reject(false);
+        } else {
+          console.log('resolve it');
+          deferred.resolve(true);
+        }
+
       })
       .error(function(data, status, header, config) {
         deferred.reject(status);
@@ -48,7 +72,8 @@ userModule.factory('userService', ['$http', '$q', function($http, $q) {
     storeCurrentUser: storeCurrentUser,
     getCurrentUser: getCurrentUser,
     getUsers: getUsers,
-    userExists: userExists
+    userExists: userExists,
+    addUser: addUser
   };
 
 }]);

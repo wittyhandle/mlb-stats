@@ -8,7 +8,7 @@
             novalidate
             name="newUser"
             class="form-horizontal new-user"
-            ng-submit="addUser(user)">
+            ng-submit="addUser(newUser.$valid)">
             <fieldset>
 
               <legend>Add User</legend>
@@ -64,13 +64,13 @@
                     ng-required="true"
                     username-unique-validator
                     ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }"
-                    ng-model="user.username"
+                    ng-model="user.userName"
                     ng-focus="clearValidation()">
                 </div>
 
                 <div ng-messages="newUser.userName.$error" ng-show="newUser.$submitted" class="admin-alerts pull-right col-lg-9">
                   <div class="message" ng-message="required"><alert type="danger">Please enter a username</alert></div>
-                  <div class="message" ng-message="username-unique"><alert type="danger">The username already exists</alert></div>
+                  <div class="message" ng-message="userExists"><alert type="danger">The username already exists</alert></div>
                 </div>
 
               </div>
@@ -121,6 +121,11 @@
                     <div class="pull-right">
                       <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add User</button>
                     </div>
+
+                    <div ng-show="error" class="admin-alerts pull-left col-lg-9">
+                      <div class="message"><alert type="danger">Could not create a new user</alert></div>
+                    </div>
+
                   </div>
                 </div>
 

@@ -1,29 +1,27 @@
-app.directive('cdgdUserAdd', ['userService', function(userService) {
+app.directive('cdgdUserAdd', ['userService', '$state', function(userService, $state) {
 
   return {
     restrict: 'E',
     templateUrl: 'js/partials/users/user-add-tpl.html',
     link: function(scope, element, attrs) {
 
-      scope.user = {
-        firstName: '',
-        lastName: '',
-        username: '',
-        password1: '',
-        password2: ''};
+      scope.user = {};
+      scope.addUser = function(valid) {
 
-      scope.addUser = function(user) {
+        if (!valid) return;
 
-        // go digging for the form element
-        //var form = element.find('form');
-        //console.log(form.input);
-        console.log(user);
+        userService.addUser(scope.user)
+          .then(function(newUser) {
+            $state.go('admin.user.list');
+          }).catch(function(err) {
+            scope.error = 'bad';
+          });
 
-      }
+      };
 
       scope.clearValidation = function() {
         scope.newUser.$setPristine();
-      }
+      };
 
     }
   };

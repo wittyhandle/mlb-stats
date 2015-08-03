@@ -4,15 +4,10 @@ app.directive('usernameUniqueValidator', ['userService', function(userService) {
     require: 'ngModel',
     link: function(scope, element, attrs, ngModel) {
 
-      ngModel.$parsers.push(function(value) {
-
-        userService.userExists(value).then(function(status) {
-          console.log('this is the status', status);
-          ngModel.$setValidity('username-unique', !status.found);
-          return value;
-        });
-
-      });
+      ngModel.$asyncValidators.userExists = function(modelValue, fieldValue) {
+        var value = modelValue || fieldValue;
+        return userService.userExists(value);
+      };
 
     }
   };

@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     User = require('../models').user,
+    bcrypt = require('bcryptjs'),
     _ = require('lodash');
 
 /* GET users listing. */
@@ -30,6 +31,28 @@ router.get('/exists/:username', function(req, res, next) {
     }
 
   });
+
+});
+
+router.post('/create', function(req, res, next) {
+
+  console.log('the body', req.body);
+  var password = bcrypt.hashSync(req.body.password1, 8);
+
+  User
+    .create({
+      password: password,
+      username: req.body.userName,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    })
+    .then(function (newUser) {
+      res.send(201, newUser);
+    })
+    .catch(function(err) {
+      console.log('here', err);
+      res.send(500, err);
+    });
 
 });
 
