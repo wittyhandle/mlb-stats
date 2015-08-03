@@ -19,4 +19,18 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.get('/exists/:username', function(req, res, next) {
+
+  User.find({where: {username: req.params.username}}).then(function(user) {
+
+    if (user) {
+      res.json({found: true});
+    } else {
+      res.json({found: false});
+    }
+
+  });
+
+});
+
 module.exports = router;

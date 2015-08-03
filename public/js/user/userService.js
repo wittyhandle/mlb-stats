@@ -28,10 +28,27 @@ userModule.factory('userService', ['$http', '$q', function($http, $q) {
 
   };
 
+  var userExists = function(username) {
+
+    var deferred = $q.defer();
+
+    $http.get('/api/users/exists/' + username)
+      .success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      })
+      .error(function(data, status, header, config) {
+        deferred.reject(status);
+      });
+
+    return deferred.promise;
+
+  };
+
   return {
     storeCurrentUser: storeCurrentUser,
     getCurrentUser: getCurrentUser,
-    getUsers: getUsers
+    getUsers: getUsers,
+    userExists: userExists
   };
 
 }]);
