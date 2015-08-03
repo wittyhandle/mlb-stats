@@ -8,6 +8,7 @@ underscore.factory('_', function() {
 var app = angular.module('mlb',
   [ 'underscore',
     'ngAnimate',
+    'ngMessages',
     'cdgd.auth',
     'cdgd.user',
     'cdgd.projects',

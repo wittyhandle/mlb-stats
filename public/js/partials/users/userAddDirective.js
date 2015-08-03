@@ -5,11 +5,26 @@ app.directive('cdgdUserAdd', ['userService', function(userService) {
     templateUrl: 'js/partials/users/user-add-tpl.html',
     link: function(scope, element, attrs) {
 
-      scope.users = null;
+      scope.user = {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password1: '',
+        password2: ''};
 
-      userService.getUsers().then(function(users) {
-        scope.users = users;
-      });
+      scope.addUser = function(user) {
+
+        // go digging for the form element
+        //var form = element.find('form');
+        //console.log(form.input);
+        console.log(user);
+
+      }
+
+      scope.clearValidation = function() {
+        scope.newUser.$setPristine();
+      }
+
     }
   };
 
