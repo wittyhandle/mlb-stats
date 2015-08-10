@@ -1,10 +1,42 @@
 <div class="modal-header">
-  <h3 class="modal-title">{{name}}</h3>
+  <h3 class="modal-title">Edit {{name}}</h3>
 </div>
-<div class="modal-body">
-  Stuff will go here
-</div>
-<div class="modal-footer">
-  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Edit User</button>
-  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-</div>
+
+<form
+  novalidate
+  name="editUserForm"
+  class="form-horizontal new-user"
+  ng-submit="postEditUser(editUserForm.$valid)">
+
+  <div class="modal-body">
+
+    <fieldset>
+
+      <div class="form-group">
+        <label for="firstName" class="col-lg-3 control-label">First Name</label>
+        <div class="user-field col-lg-9">
+          <input
+            type="text"
+            class="form-control input-sm"
+            id="firstName"
+            name="firstName"
+            ng-required="true"
+            ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }"
+            ng-model="user.firstName"
+            ng-focus="clearValidation()">
+        </div>
+
+        <div ng-messages="editUserForm.firstName.$error" ng-show="editUserForm.$submitted" class="admin-alerts pull-right col-lg-9">
+          <div class="message" ng-message="required"><alert type="danger">Please enter a first name</alert></div>
+        </div>
+
+      </div>
+
+    </fieldset>
+
+  </div>
+  <div class="modal-footer">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Edit User</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</form>
