@@ -20,7 +20,7 @@ app.directive('cdgdUserAdd', ['userService', '$state', function(userService, $st
       };
 
       scope.clearValidation = function() {
-        scope.newUser.$setPristine();
+        //scope.newUser.$setPristine();
       };
 
     }

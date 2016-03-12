@@ -1,0 +1,12 @@
+<label for="{{name}}" class="col-lg-3 control-label">{{label}}</label>
+<div class="user-field col-lg-9">
+  <input
+    type="{{type}}"
+    class="form-control input-sm"
+    id="{{name}}"
+    name="{{name}}"
+    ng-required="{{required}}"
+    ng-model-options="{ debounce : { 'default' : 300, blur : 0 } }"
+    ng-model=field
+    ng-focus="clearValidation()">
+</div>
